@@ -1,5 +1,6 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import "./about.scss";
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 
@@ -19,15 +20,12 @@ const finished = false;
 const goal = 3;
 const skillColor = "navy";
 const fontWeight = "bold";
-const textCase = "uppercase"; 
+const textCase = "uppercase";  
 ---
 
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>{pageTitle}</title>
-    <style define:vars={{ skillColor, fontWeight, textCase }}> 
+  <head>  
+    <style is:global define:vars={{ skillColor, fontWeight, textCase }}> 
       h1 {
         color: purple;
         font-size: 4rem;
@@ -39,8 +37,8 @@ const textCase = "uppercase";
       }
     </style>
   </head>
-  <Layout>
-    
+  <BaseLayout pageTitle={pageTitle}>
+     
     <h1>{pageTitle}</h1>
     <h2>... and my new Astro site!</h2>
 
@@ -84,4 +82,4 @@ const textCase = "uppercase";
         <p>My goal is not 3 days.</p>
       )
     } 
-  </Layout> 
+  </BaseLayout> 
