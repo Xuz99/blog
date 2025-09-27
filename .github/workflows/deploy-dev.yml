@@ -25,7 +25,7 @@ jobs:
       - name: Build the site
         run: npm run build:dev
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: github-pages
       # - name: Install, build, and upload your site
