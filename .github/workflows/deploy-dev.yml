@@ -23,11 +23,15 @@ jobs:
       - name: Build site (dev)
         run: npm run build:dev
 
+      - name: Wrap dist in dev folder
+        run: |
+          mkdir -p temp
+          mv dist temp/dev
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
-
         with:
-          path: ./dist
+          path: ./temp   # temp contains dev/
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
