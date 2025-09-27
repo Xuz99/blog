@@ -50,6 +50,6 @@ jobs:
           path: ./dist
       - name: Dev Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v4 
         with:
-          folder: ./dist
+          artifact_name: dev-build
