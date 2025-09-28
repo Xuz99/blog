@@ -22,6 +22,8 @@ jobs:
 
       - name: Build site (dev)
         run: npm run build:dev
+        env:
+          SITE: 'https://blog.johndavidson.dev/dev/'
 
       - name: Wrap dist in dev folder
         run: |
