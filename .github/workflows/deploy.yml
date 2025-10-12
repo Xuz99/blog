@@ -47,10 +47,10 @@ jobs:
           if [ "${GITHUB_REF##*/}" = "dev" ]; then
             mkdir -p dev
             rm -rf dev/*
-            cp -r dist/* dev/
+            cp -r ./dist/* dev/
           else
             rm -rf *
-            cp -r dist/* .
+            cp -r ./dist/* .
           fi
 
       # 6️⃣ Commit changes
