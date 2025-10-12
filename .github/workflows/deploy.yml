@@ -35,25 +35,31 @@ jobs:
             npm run build      # production build for main
           fi
 
-      # 4️⃣ Checkout gh-pages branch
+      # 4️⃣ Save build files
+      - name: Save build files
+        run: |
+          mkdir -p /tmp/build
+          cp -r ./dist/* /tmp/build/
+
+      # 5️⃣ Checkout gh-pages branch
       - name: Checkout gh-pages
         run: |
           git fetch origin gh-pages
           git checkout gh-pages || git checkout --orphan gh-pages
 
-      # 5️⃣ Copy build into correct folder
+      # 6️⃣ Copy build into correct folder
       - name: Copy build
         run: |
           if [ "${GITHUB_REF##*/}" = "dev" ]; then
             mkdir -p dev
             rm -rf dev/*
-            cp -r ./dist/* dev/
+            cp -r /tmp/build/* dev/
           else
             rm -rf *
-            cp -r ./dist/* .
+            cp -r /tmp/build/* .
           fi
 
-      # 6️⃣ Commit changes
+      # 7️⃣ Commit changes
       - name: Commit changes
         run: |
           git config user.name "github-actions"
@@ -61,6 +67,6 @@ jobs:
           git add .
           git commit -m "Deploy ${GITHUB_REF##*/} build from $GITHUB_SHA" || echo "No changes to commit"
 
-      # 7️⃣ Push to gh-pages
+      # 8️⃣ Push to gh-pages
       - name: Push to gh-pages
         run: git push origin gh-pages
