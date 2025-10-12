@@ -1,46 +1,66 @@
-name: Deploy Astro to GitHub Pages
+name: Deploy Astro site
 
 on:
   push:
     branches:
       - main
       - dev
+  workflow_dispatch:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 jobs:
-  build-deploy:
+  deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repo
+      # 1️⃣ Checkout the branch being pushed
+      - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
         with:
-          node-version: 20
+          fetch-depth: 0
 
+      # 2️⃣ Install dependencies
       - name: Install dependencies
         run: npm ci
 
-      - name: Build Astro
-        env:
-          SITE_URL: ${{ github.ref == 'refs/heads/main' && 'https://blog.johndavidson.dev' || 'https://dev.johndavidson.dev' }}
-        run: npm run build
-
-      - name: Add CNAME for custom domain
+      # 3️⃣ Build site
+      - name: Build site
         run: |
-          if [ "${{ github.ref }}" == "refs/heads/main" ]; then
-            echo "blog.johndavidson.dev" > dist/CNAME
+          if [ "${GITHUB_REF##*/}" = "dev" ]; then
+            npm run build:dev   # base already set to /dev/
           else
-            echo "dev.blog.johndavidson.dev" > dist/CNAME
+            npm run build      # production build for main
           fi
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          publish_branch: ${{ github.ref == 'refs/heads/main' && 'gh-pages' || 'gh-pages-dev' }}
+      # 4️⃣ Checkout gh-pages branch
+      - name: Checkout gh-pages
+        run: |
+          git fetch origin gh-pages
+          git checkout gh-pages || git checkout --orphan gh-pages
+
+      # 5️⃣ Copy build into correct folder
+      - name: Copy build
+        run: |
+          if [ "${GITHUB_REF##*/}" = "dev" ]; then
+            mkdir -p dev
+            rm -rf dev/*
+            cp -r dist/* dev/
+          else
+            rm -rf *
+            cp -r dist/* .
+          fi
+
+      # 6️⃣ Commit changes
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add .
+          git commit -m "Deploy ${GITHUB_REF##*/} build from $GITHUB_SHA" || echo "No changes to commit"
+
+      # 7️⃣ Push to gh-pages
+      - name: Push to gh-pages
+        run: git push origin gh-pages
