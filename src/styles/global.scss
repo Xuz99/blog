@@ -86,3 +86,16 @@ h1 {
   max-width: 900px;
   margin: 0 auto;
 }
+
+@view-transition {
+	navigation: auto;
+}
+
+::view-transition-group(*),
+::view-transition-old(*),
+::view-transition-new(*) {
+	animation-duration: 0.6s;
+	animation-fill-mode: forwards; /* important if you mix durations */
+	animation-timing-function: var(--default-ease);
+}
+
