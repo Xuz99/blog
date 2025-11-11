@@ -1,72 +1,38 @@
-name: Deploy Astro site
-
+name: Deploy to Astro site
 on:
+  # Trigger the workflow every time you push to the `main` branch
+  # Using a different branch name? Replace `main` with your branch’s name
   push:
-    branches:
-      - main
-      - dev
+    branches: [ main ]
+  # Allows you to run this workflow manually from the Actions tab on GitHub.
   workflow_dispatch:
 
+# Allow this job to clone the repo and create a page deployment
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
-      # 1️⃣ Checkout the branch being pushed
-      - name: Checkout code
+      - name: Checkout your repository using git
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+      - name: Install, build, and upload your site
+        uses: withastro/action@v3
+        # with:
+          # path: . # The root location of your Astro project inside the repository. (optional)
+          # node-version: 20 # The specific version of Node that should be used to build your site. Defaults to 20. (optional)
+          # package-manager: pnpm@latest # The Node package manager that should be used to install dependencies and build your site. Automatically detected based on your lockfile. (optional)
 
-      # 2️⃣ Install dependencies
-      - name: Install dependencies
-        run: npm ci
-
-      # 3️⃣ Build site
-      - name: Build site
-        run: |
-          if [ "${GITHUB_REF##*/}" = "dev" ]; then
-            npm run build:dev   # base already set to /dev/
-          else
-            npm run build      # production build for main
-          fi
-
-      # 4️⃣ Save build files
-      - name: Save build files
-        run: |
-          mkdir -p /tmp/build
-          cp -r ./dist/* /tmp/build/
-
-      # 5️⃣ Checkout gh-pages branch
-      - name: Checkout gh-pages
-        run: |
-          git fetch origin gh-pages
-          git checkout gh-pages || git checkout --orphan gh-pages
-
-      # 6️⃣ Copy build into correct folder
-      - name: Copy build
-        run: |
-          if [ "${GITHUB_REF##*/}" = "dev" ]; then
-            mkdir -p dev
-            rm -rf dev/*
-            cp -r /tmp/build/* dev/
-          else
-            rm -rf *
-            cp -r /tmp/build/* .
-          fi
-
-      # 7️⃣ Commit changes
-      - name: Commit changes
-        run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          git add .
-          git commit -m "Deploy ${GITHUB_REF##*/} build from $GITHUB_SHA" || echo "No changes to commit"
-
-      # 8️⃣ Push to gh-pages
-      - name: Push to gh-pages
-        run: git push origin gh-pages
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
