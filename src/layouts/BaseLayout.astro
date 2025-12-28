@@ -12,15 +12,16 @@ const { pageTitle } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script src="https://kit.fontawesome.com/83b86983a1.js" crossorigin="anonymous"></script>
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle} | John Davidson Website Designer & Developer</title> 
   </head>
 
   <body>
     <Header />
-    <div class="content">
+    <main class="content">
       <slot />
-    </div>
+    </main>
     <Footer />
     <script>
       import "../scripts/menu.js";

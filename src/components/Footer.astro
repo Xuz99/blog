@@ -1,9 +1,21 @@
----
-import Social from './Social.astro';
+--- 
 ---
 
-<footer class="content">
-  <Social platform="twitter" username="astrodotbuild" />
-  <Social platform="github" username="withastro" />
-  <Social platform="youtube" username="astrodotbuild" />
+<footer>
+  <div class="container-fluid px-0">
+    <div class="row">  
+      <div class="col-lg-6">
+        <ul class="list-inline footer-links">
+          <li><a href="mailto:contact@johndavidson.dev" title="Email John"><i class="fa-solid fa-envelope"></i></a></li>
+          <li><a href="https://www.linkedin.com/in/johndavidsondev/" title="John's Linkedin profile" target="_blank"><i class="fa-brands fa-linkedin"></i></a></li>
+           <li><a href="https://codepen.io/xuz99" title="John's Codepen.io profile" target="_blank"><i class="fa-brands fa-codepen"></i></a></li>
+          <li><a href="https://github.com/Xuz99" title="John's Github profile" target="_blank"><i class="fa-brands fa-square-github"></i></a></li>
+        </ul>
+      </div> 
+      <div class="col-lg-6 justify-content-center  justify-content-lg-end d-flex align-items-lg-end px-lg-0">
+        <p class="copyright-mobile mb-0"><strong>Copyright &copy; johndavidson.dev <br>  All Rights Reserved 2019 - {new Date().getFullYear()}</strong></p> 
+        <p class="copyright-desktop mb-0"><strong>Copyright &copy; johndavidson.dev |  All Rights Reserved 2019 - {new Date().getFullYear()}</strong></p>
+      </div>
+    </div>
+  </div>
 </footer> 

@@ -22,8 +22,7 @@ body {
   width: 100%;
   height: 100%;
   margin: 0 auto;
-  line-height: 1.5;
-  background-color: #ff9776;
+  line-height: 1.5; 
 }
 html {
   background-color: #f1f5f9;
@@ -86,7 +85,7 @@ nav {
       @media (min-width: 37.5em) {
         p:first-child {
           font-size: 1.75rem;
-        }   
+        }
       }
     }
   }
@@ -101,6 +100,7 @@ nav {
         font-size: 1.3125rem;
         font-weight: 400;
         color: #000000;
+        transition: all 0.3s ease-in-out;
         &:hover {
           color: $bjj-blue;
         }
@@ -129,18 +129,80 @@ nav {
   }
 }
 
+footer {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  padding: 2rem;
+  width: 100%;
+  background-color: #fff;
+  border: #000000 1px solid;
+  display: flex;
+  justify-content: center; 
+  
+  @media (min-width: 75rem) {
+    padding: 3.125rem;
+    max-width: calc(100% - 17.5rem);
+     justify-content: flex-start;
+  }
+  ul.footer-links {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5625rem;
+    @media (min-width: 62rem) {
+      margin-bottom: 0;
+       justify-content: flex-start;
+    }
+    li {
+      margin: 0;
+      padding: 0;
+      margin-right: 1.5625rem;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+    a {
+      text-decoration: none;
+      color: #000;
+      font-size: 1.125rem;
+      font-weight: 400;
+    }
+    i {
+      font-size: 3.125rem;
+      height: auto;
+      color: #000;
+      transition: all 0.3s ease-in-out;
+      &:hover {
+        color: $bjj-blue;
+      }
+    }
+  }
+  .copyright-mobile {
+    display: block;
+    text-align: center;
+    @media (min-width: 48em) {
+      display: none;
+    }
+  }
+  .copyright-desktop {
+    display: none;
+    font-size: 0.96rem;
+    @media (min-width: 48em) {
+      text-align: right;
+      display: block;
+      padding-right: 0.7rem;
+    }
+    @media (min-width: 75em) {
+      font-size: 1rem;
+    }
+  }
+}
 
-
-
-
-
-
-
-
-.content {
+.content { 
   padding: 1rem;
   max-width: 900px;
-  margin: 0 auto;
+  margin: 0 auto; 
 }
 @view-transition {
   navigation: auto;
