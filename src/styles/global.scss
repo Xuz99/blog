@@ -30,6 +30,7 @@ body {
 body {
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
   @media (min-width: 120rem) {
     max-width: 120rem;
   }
