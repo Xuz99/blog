@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'; 
+// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
+// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+
+const pageTitle = "Contact Me";
+const description = 'Get in touch';
+const bodyClasses = 'contact-page';
+---
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{pageTitle}</title>
+        <meta name="description" content={description} />
+    </head>
+    <BaseLayout pageTitle={pageTitle} bodyClasses={bodyClasses}>
+        <h1>Contact</h1> 
+        <p>Want to start a project with me? <br> Feel free to reach me using the form below. </p>
+
+        <!-- POSTs to a serverless function at /api/contact (implement separately) -->
+        <form class="contact-form" method="post" action="/api/contact" netlify>
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" required />
+
+            <label for="name">Phone</label>
+            <input id="phone" name="phone" type="text"  />
+
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required />
+
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="6" required></textarea>
+
+            <!-- simple honeypot to reduce spam -->
+            <input type="text" name="_hp" style="display:none" tabindex="-1" autocomplete="off" />
+
+            <button type="submit">Send</button>
+        </form> 
+    </BaseLayout>
+</html>
