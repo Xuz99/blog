@@ -9,8 +9,8 @@ const { pageTitle } = Astro.props;
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta charset="UTF-8" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <script src="https://kit.fontawesome.com/83b86983a1.js" crossorigin="anonymous"></script>
     <meta name="generator" content={Astro.generator} />
@@ -19,7 +19,7 @@ const { pageTitle } = Astro.props;
 
   <body>
     <Header />
-    <main class="content">
+    <main>
       <slot />
     </main>
     <Footer />
