@@ -3,6 +3,5 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-  site: process.env.SITE || 'https://blog.johndavidson.dev/',
-  output: 'static',
+  site: process.env.SITE || 'https://blog.johndavidson.dev/', 
 })
