@@ -1,0 +1,48 @@
+---
+import { Picture } from 'astro:assets'; 
+import PlaceholderImg from '../images/placeholder.png';
+import InvertedMountain from '../images/projects/1_inverted-mountain.png';
+import CQSLtd from '../images/projects/2_cqsltd.png';
+import Rapunzel from '../images/projects/3_rapunzel-2812.png';
+import HME from '../images/projects/4_hme-edtech.png';
+import Invertek from '../images/projects/5_invertek_drives.png';
+import Filtermist from '../images/projects/6_filtermist.png';
+---
+
+<section class="projects-section"> 
+  <h1>Projects</h1>
+  <div class="projects-list">
+    <ul class="list-style-none">
+        <li>
+            <a href="https://inmountapp.surge.sh/" target="_blank" class="project_link">
+              <Picture class="project_screenshot --1" src={InvertedMountain} formats={['avif', 'webp']} alt="Inverted Mountain" title="Business website for indie games studio inVERTed mOUNTAIn" />
+            </a>
+        </li>
+        <li>
+            <a href="https://www.cqsltd.com/" target="_blank" class="project_link">
+              <Picture class="project_screenshot --2" src={CQSLtd} formats={['avif', 'webp']} alt="CQS Ltd"  />
+            </a>
+        </li>
+        <li>
+            <a href="https://rapunzel2812.surge.sh/" target="_blank" class="project_link">
+              <Picture class="project_screenshot --3" src={Rapunzel} formats={['avif', 'webp']} alt="Rapunzel 2812" title="Story teller website, telling a reinterpretation of the story of Rapunzel 1812" />
+            </a>
+        </li>
+        <li>
+            <a href="https://www.hme-edtech.com/" target="_blank" class="project_link">
+              <Picture class="project_screenshot --4" src={HME} formats={['avif', 'webp']} alt="HME edtech project" />
+            </a>
+        </li>
+        <li>
+            <a href="https://www.invertekdrives.com/" target="_blank" class="project_link">
+              <Picture class="project_screenshot --5" src={Invertek} formats={['avif', 'webp']} alt="Invertek Drives Website" />
+            </a>
+        </li>
+        <li>
+            <a href="https://www.filtermist.com/" target="_blank" class="project_link">
+              <Picture class="project_screenshot --6" src={Filtermist} formats={['avif', 'webp']} alt="Filtermist" />
+            </a>
+        </li> 
+    </ul>
+  </div>  
+</section>

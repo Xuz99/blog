@@ -1,0 +1,94 @@
+---
+ 
+---
+<div class="row contact-form-row">
+    <div class="col">
+        <section class="contact-section">
+            <h2>Contact</h2>
+            <p class="page-intro">Want to start a project with me? <br> Feel free to reach me using the form below.</p>
+            <!-- POSTs to a serverless function at /api/contact (implement separately) -->
+            <form id="contact-form" class="contact-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input id="name" name="name" type="text" placeholder="Your name" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone number</label>
+                        <input id="phone" name="phone" type="text" placeholder="Your phone number"  />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input id="email" name="email" type="email" placeholder="Enter your Email" required />
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="form-message" name="message" rows="6" placeholder="Write your message" required></textarea>
+                </div>
+            
+                <button id="submit-btn" type="submit">Send Message</button>
+            </form>
+        </section> 
+    </div>
+</div> 
+ 
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+  const formMessage = document. getElementById('form-message') as HTMLDivElement;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Get form data
+    const formData = new FormData(form);
+    const data = {
+      name:  formData.get('name') as string,
+      phone:  formData.get('phone') as string,
+      email: formData.get('email') as string, 
+      message: formData.get('message') as string,
+    };
+    
+
+    // Disable submit button
+    submitBtn.disabled = true;
+    submitBtn. textContent = 'Sending... ';
+    formMessage.style.display = 'none';
+
+    try {
+      // Send POST request to your API endpoint
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+      console.log(response);
+      const result = await response.json();
+      
+
+      if (response.ok) {
+        // Success
+        formMessage.textContent = 'Message sent successfully!  We\'ll get back to you soon.';
+        formMessage.className = 'form-message success';
+        form.reset();
+      } else {
+        // Error from server
+        formMessage.textContent = result.error || 'Failed to send message. Please try again.';
+        formMessage.className = 'form-message error';
+      }
+    } catch (error) {
+      // Network error
+      console.error('Error:', error);
+      formMessage.textContent = 'An error occurred. Please try again later.';
+      formMessage.className = 'form-message error';
+    } finally {
+      // Re-enable submit button
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send Message';
+    }
+  });
+</script>
+ 

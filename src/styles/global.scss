@@ -21,12 +21,12 @@ body {
 }
 
 html {
-  font: 3vw/1.3 "Nunito", Arial, sans-serif; 
+  font: 3vw/1.3 "Nunito", Arial, sans-serif;
   background-color: #ffffff;
   font-optical-sizing: auto;
   font-weight: 400;
   @media (min-width: 35em) {
-      font-size: 16px;
+    font-size: 16px;
   }
 }
 
@@ -35,6 +35,7 @@ body {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+  color: #000;
   @media (min-width: 120rem) {
     max-width: 120rem;
   }
@@ -48,14 +49,14 @@ main {
 }
 
 h1 {
-  margin: 1rem 0;
+  margin: 0;
   font-size: 5.625rem;
 }
 /* nav styles */
 // Logo and brand styles
 
 nav {
-  &.navbar.navbar-expand-lg.bg-body-tertiary {
+  &.navbar.navbar-expand-lg {
     width: 100%;
     padding: 2rem;
     border: #000000 1px solid;
@@ -144,20 +145,28 @@ nav {
   }
 }
 
+p {
+  margin: 0;
+}
 
 .content {
   flex-grow: 1;
   position: relative;
   width: 100%;
   min-height: 100vh;
-  padding: 2rem;
-  @media (min-width: 75rem) {
-    padding: 9.375rem;
+  padding: 4.375rem 2rem;
+  @media (min-width: 65rem) {
+    padding: 4.375rem;
+  }
+  @media (min-width: 75rem) { 
     width: calc(100% - 17.5rem);
     justify-content: center;
     margin: 0 auto;
     border-left: dashed 1px black;
     border-right: dashed 1px black;
+  }
+  @media (min-width: 85.375rem) {
+    padding: 9.375rem;
   }
   &::before,
   &::after {
@@ -177,12 +186,7 @@ nav {
   }
 }
 
-
 footer {
-  // position: absolute;
-  // left: 50%;
-  // transform: translateX(-50%);
-  // bottom: 0;
   padding: 2rem;
   width: 100%;
   background-color: #fff;
@@ -219,29 +223,35 @@ footer {
       font-weight: 400;
     }
     i {
-      font-size: 3.125rem;
+      font-size: 5rem;
       height: auto;
       color: #000;
       transition: all 0.3s ease-in-out;
       &:hover {
         color: $bjj-blue;
       }
+      @media (min-width: 48em) {
+        font-size: 3.125rem;
+      }
     }
   }
-  .copyright-mobile {
+  .copyright {
     display: block;
     text-align: center;
-    @media (min-width: 48em) {
+    font-size: 1.5rem;
+    span {
       display: none;
     }
-  }
-  .copyright-desktop {
-    display: none;
-    font-size: 0.96rem;
     @media (min-width: 48em) {
+      font-size: 0.96rem;
       text-align: right;
-      display: block;
       padding-right: 0.7rem;
+      span {
+        display: inline;
+      }
+      br {
+        display: none;
+      }
     }
     @media (min-width: 75em) {
       font-size: 1rem;
@@ -249,14 +259,180 @@ footer {
   }
 }
 
-
-
-.contact-page {
+.contact-section {
+  h2 {
+    font-size: 5.625rem;
+    margin-bottom: 3rem;
+  }
+  p.page-intro {
+    font-size: 1.75rem;
+    margin-bottom: 0;
+  }
 }
 
+.page-home {
+  .lead {
+    font-size: 1.875rem;
+    margin-top: 1.25rem;
+  }
+  .john-picture {
+    width: 100%;
+    height: auto;
+
+    object-fit: contain;
+    object-position: top;
+    border: #000000 1px solid;
+    margin-top: 2rem;
+    margin-bottom: 4.375rem;
+    @media (min-width: 48em) {
+      margin: 0;
+    }
+  }
+  .content.home-intro {
+    min-height: auto;
+    @media (min-width: 75em) {
+      min-height: 100vh;
+       
+    }
+  }
+  .projects-section {
+    width: 90%;
+    max-width: 90%;
+    margin: 0 auto;
+    margin-top: -4rem;
+    @media (min-width: 75em) {
+      margin-top: -14rem;
+    }
+    h1 {
+      margin-bottom: 3rem;
+      @media (min-width: 48em) {
+        display: none;
+      }
+    }
+    .projects-list {
+      .list-style-none {
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        li {
+          list-style: none;
+          &:last-child {
+            margin-bottom: 4.375rem;
+          }
+          a {
+            width: 100%;
+            height: auto;
+            display: block;
+          }
+        }
+        @media (min-width: 48em) {
+          gap: 0;
+          grid-template-columns: 1fr 1fr;
+        }
+        @media (min-width: 75em) {
+          grid-template-columns: 1fr 1fr 1fr;
+        }
+      }
+      .project_screenshot {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        position: relative;
+        border: #000000 2px solid; 
+        box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.7);
+        @media (min-width: 48em) {
+          &:hover {
+            transition: all 0.3s ease-in-out;
+            scale: 1.02;
+          }
+          &.--1 {
+            z-index: 3;
+            transform: rotate(-17deg);
+          }
+          &.--2 {
+            z-index: 6;
+            transform: rotate(4deg);
+          }
+          &.--3 {
+            z-index: 4;
+            transform: rotate(10deg);
+          }
+          &.--4 {
+            z-index: 2;
+            transform: rotate(-9deg);
+          }
+          &.--5 {
+            z-index: 5;
+            transform: rotate(17deg);
+          }
+          &.--6 {
+            z-index: 1;
+            transform: rotate(32deg);
+          }
+        }
+      }
+    }
+  }
+}
 .contact-form {
+  width: 100%;
+  margin-top: 3.75rem;
   display: flex;
   flex-direction: column;
+  .form-row {
+    display: flex;
+    flex-direction: column;
+    @media (min-width: 62em) {
+      flex-direction: row;
+      gap: 1.875rem;
+      .form-group {
+        width: 50%;
+      }
+    }
+  }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.875rem;
+    label {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    input {
+      height: 3.125rem;
+      padding: 1.25rem 0.9rem;
+      border: #000000 1px solid;
+    }
+    textarea {
+      padding: 1.25rem 0.9rem;
+      border: #000000 1px solid;
+      resize: vertical;
+    }
+  }
+  button {
+    width: 100%;
+    align-self: center;
+    background-color: #ffffff;
+    color: #000000;
+    outline: #000000 1px solid;
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding: 0.9375rem 2rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    &:hover {
+      background-color: $bjj-blue;
+      color: #fff;
+      outline: $bjj-blue 1px solid;
+    }
+    @media (min-width: 48em) {
+      max-width: 25rem;
+    }
+  }
 }
 
 @view-transition {

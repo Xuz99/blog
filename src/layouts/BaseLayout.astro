@@ -4,6 +4,14 @@ import Footer from "../components/Footer.astro";
 import "../styles/bootstrap.scss";
 import "../styles/global.scss"; 
 const { pageTitle } = Astro.props;
+
+const { bodyClass: customClass } = Astro.props;
+
+const pathname = Astro.url.pathname;
+const slug = pathname === "/" ? "home" : pathname.replace(/\//g, "-").replace(/^-|-$/g, "");
+const autoClass = `page-${slug}`; 
+const bodyClass = customClass ?? autoClass;
+
 ---
 
 <!doctype html>
@@ -17,7 +25,7 @@ const { pageTitle } = Astro.props;
     <title>{pageTitle} | John Davidson Website Designer & Developer</title> 
   </head>
 
-  <body>
+  <body class={bodyClass}>
     <Header />
     <main>
       <slot />

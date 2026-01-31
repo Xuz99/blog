@@ -1,10 +1,29 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm.astro'; 
+ 
+import { Picture } from 'astro:assets'; 
+import JohnPicture from '../images/john.png';
+import Projects from '../components/Projects.astro';
 const pageTitle = "Home Page";
+export const prerender = false;
 ---
 <BaseLayout pageTitle={pageTitle}>
-  <div class="content"> 
-    <h1>Welcome to My Website</h1>
-    <p>This is the home page of my Astro website.</p>
+  <div class="content home-intro"> 
+    <div class="row">
+      <div class="col-md-6 col-lg-5">
+        <h1>Hello</h1>
+        <p class="lead">I am a web designer/developer, creative problem solver, writer in my spare time, world traveller in a past life, BJJ martial artist in my down time.</p>
+      </div>
+      <div class="col-md-6 col-lg-6 offset-lg-1">
+        <Picture class="john-picture" src={JohnPicture} formats={['avif', 'webp']} alt="John Davidson Profile Photo" /> 
+      </div>
+    </div> 
   </div>
+
+    <Projects />
+
+  <div class="content">
+    <ContactForm />
+  </div> 
 </BaseLayout>

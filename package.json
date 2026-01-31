@@ -1,5 +1,5 @@
 {
-  "name": "playground",
+  "name": "johndavidson.dev blog",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -11,6 +11,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/node": "^9.5.1",
     "astro": "^5.12.8",
     "bootstrap": "^5.3.8",
     "sass": "^1.92.1"
